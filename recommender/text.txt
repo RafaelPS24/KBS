@@ -1,0 +1,61 @@
+(clear)
+
+(load templates.clp)
+
+(load facts.clp)
+
+(load rules.clp)
+
+opcional
+(watch activations)
+
+(reset)
+
+(facts)
+
+(bind ?oid1 (gensym*))
+
+(assert (orden-compra
+   (orden-id ?oid1)
+   (cliente-id c1)
+   (metodo-pago tipo tarjeta id-tarjeta t1)
+))
+
+(assert (item-orden
+   (orden-id ?oid1)
+   (item-id p101)
+   (qty 30)
+))
+
+(run)
+
+(reset)
+
+(bind ?oid2 (gensym*))
+
+(assert (orden-compra
+   (orden-id ?oid2)
+   (cliente-id c2)
+   (metodo-pago tipo contado)
+))
+
+(assert (item-orden (orden-id ?oid2) (item-id p201) (qty 1)))
+
+(assert (item-orden (orden-id ?oid2) (item-id p101) (qty 1)))
+
+(run)
+
+(reset)
+
+(bind ?oid3 (gensym*))
+
+(assert (orden-compra
+   (orden-id ?oid3)
+   (cliente-id c1)
+   (metodo-pago tipo contado)
+))
+
+(assert (item-orden (orden-id ?oid3) (item-id p202) (qty 99)))
+
+(run)
+
